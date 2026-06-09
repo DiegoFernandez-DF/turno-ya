@@ -1,0 +1,51 @@
+{% extends "base.html" %}
+
+{% block title %}
+Detalle Médico
+{% endblock %}
+
+{% block content %}
+
+<h2>{{ medico.nombre_completo }}</h2>
+
+<hr>
+
+<div class="card">
+    <div class="card-body">
+
+        <p>
+            <strong>Nombre:</strong>
+            {{ medico.nombre }}
+        </p>
+
+        <p>
+            <strong>Apellido:</strong>
+            {{ medico.apellido }}
+        </p>
+
+        <p>
+            <strong>Matrícula:</strong>
+            {{ medico.matricula }}
+        </p>
+
+        <p>
+            <strong>Especialidad:</strong>
+            {{ medico.especialidad }}
+        </p>
+
+        <p>
+            <strong>Cantidad de turnos:</strong>
+            {{ medico.cantidad_turnos }}
+        </p>
+
+    </div>
+</div>
+
+<a
+    href="{% url 'app:lista_medicos' %}"
+    class="btn btn-secondary mt-3"
+>
+    Volver
+</a>
+
+{% endblock %}
