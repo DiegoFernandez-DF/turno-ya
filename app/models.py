@@ -24,6 +24,50 @@ class Especialidad(models.Model):
         """Retorna la cantidad de medicos que tienen una especialidad concreta."""
         return self.medico_set.count()
 
+    @classmethod
+    def validate(cls, nombre):
+        """
+        Valida los datos de la especialidad. Retorna una lista de errores.
+        Si la lista está vacía, los datos son válidos.
+        """
+        errors = []
+
+        if not nombre or not nombre.strip():
+            errors.append("El nombre es obligatorio.")
+
+        """La descripción no es obligatoria."""
+
+        return errors
+
+    @classmethod
+    def new(cls, nombre, descripcion):
+        """
+        Crea y persiste una nueva especialidad si los datos son válidos.
+        Retorna (instancia, errors). Si hay errores, instancia es None.
+        """
+        errors = cls.validate(nombre)
+        if errors:
+            return None, errors
+
+        especialidad = cls.objects.create(
+            nombre=nombre.strip(),
+            descripcion=descripcion.strip(),
+        )
+        return especialidad, []
+
+    def update(self, nombre, descripcion):
+        """
+        Actualiza los datos de la especialidad si los datos son válidos.
+        Retorna una lista de errores. Si está vacía, la actualización fue exitosa.
+         """
+        errors = self.__class__.validate(nombre)
+        if errors:
+            return errors
+
+        self.nombre = nombre.strip()
+        self.descripcion = descripcion.strip()
+        self.save()
+        return []
 
 class Medico(models.Model):
     """Representa a un profesional médico disponible para turnos."""
@@ -154,7 +198,7 @@ class Paciente(models.Model):
         if not email or not email.strip():
             errors.append("El email es obligatorio.")
 
-        """Telefono no es obligatorio."""
+        """El Telefono no es obligatorio."""
 
         if not usuario:
             errors.append("El usuario es obligatorio.")
