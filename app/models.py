@@ -15,6 +15,7 @@ class Especialidad(models.Model):
 
     class Meta:
         ordering = ["nombre"]
+        verbose_name_plural = "Especialidades"
 
     def __str__(self):
         """Retorna una etiqueta legible para listados y admin."""
