@@ -10,8 +10,32 @@
   </div>
 </div>
 
-<!-- TODO: reemplazar con estadísticas reales del contexto -->
 <div class="row g-3">
+  <div class="col-md-4">
+    <div class="card h-100">
+      <div class="card-body">
+        <h2 class="h5">Médicos</h2>
+        <p class="display-6 mb-0">{{ total_medicos }}</p>
+      </div>
+    </div>
+  </div>
 
+  <div class="col-md-4">
+    <div class="card h-100">
+      <div class="card-body">
+        <h2 class="h5">Pacientes</h2>
+        <p class="display-6 mb-0">{{ total_pacientes }}</p>
+      </div>
+    </div>
+  </div>
+
+  <div class="col-md-4">
+    <div class="card h-100">
+      <div class="card-body">
+        <h2 class="h5">Turnos</h2>
+        <p class="display-6 mb-0">{{ total_turnos }}</p>
+      </div>
+    </div>
+  </div>
 </div>
 {% endblock %}

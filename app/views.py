@@ -3,7 +3,7 @@
 from django.shortcuts import redirect
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.views.generic import ListView, TemplateView, DetailView, CreateView
-from .models import Medico, Turno
+from .models import Medico, Turno, Paciente
 from .forms import TurnoForm
 
 class HomeView(LoginRequiredMixin ,TemplateView):
@@ -11,6 +11,16 @@ class HomeView(LoginRequiredMixin ,TemplateView):
 
     template_name = "clinica/home.html"
 
+    def get_context_data(self, **kwargs):
+        """Agrega estadísticas generales al contexto."""
+
+        context = super().get_context_data(**kwargs)
+
+        context["total_medicos"] = Medico.objects.count()
+        context["total_pacientes"] = Paciente.objects.count()
+        context["total_turnos"] = Turno.objects.count()
+
+        return context
 
 class ListaMedicosView(LoginRequiredMixin, ListView):
     """Lista todos los médicos."""
