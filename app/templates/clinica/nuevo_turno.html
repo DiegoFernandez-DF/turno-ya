@@ -1,0 +1,40 @@
+{% extends "base.html" %}
+
+{% block title %}Nuevo turno — TurnoYa{% endblock %}
+
+{% block content %}
+
+<div class="row justify-content-center">
+    <div class="col-md-8">
+
+        <h2 class="h4 mb-4">Nuevo turno</h2>
+
+        <div class="card">
+            <div class="card-body">
+
+                <form method="post">
+                    {% csrf_token %}
+
+                    {{ form.as_p }}
+
+                    <div class="mt-3">
+                        <button type="submit" class="btn btn-success">
+                            Crear turno
+                        </button>
+
+                        <a
+                            href="{% url 'app:home' %}"
+                            class="btn btn-secondary"
+                        >
+                            Cancelar
+                        </a>
+                    </div>
+                </form>
+
+            </div>
+        </div>
+
+    </div>
+</div>
+
+{% endblock %}
